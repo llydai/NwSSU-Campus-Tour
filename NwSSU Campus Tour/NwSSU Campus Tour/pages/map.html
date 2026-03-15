@@ -1,0 +1,314 @@
+<!-- ════════════════════════════════════════════════
+     MAP PAGE — Google Maps Style + Integrated Voice Nav
+     File: pages/map.html
+     ════════════════════════════════════════════════ -->
+<div class="map-layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="map-sidebar" id="mapSidebar">
+    <div class="msb-head">
+      <h2>Campus Map</h2>
+      <button class="msb-close" onclick="toggleSidebar()" title="Close">✕</button>
+    </div>
+
+    <div class="msb-search">
+      <input type="text" placeholder="Search location…" oninput="filterMapList(this.value)"/>
+    </div>
+
+    <!-- Directions panel -->
+    <div class="msb-block">
+      <p class="msb-label">DIRECTIONS</p>
+      <select id="fromLocation" class="map-select">
+        <option value="">📍 From location…</option>
+        <option value="gate">Main Gate</option>
+        <option value="cat">CAT Building</option>
+        <option value="ccis">CCIS Building</option>
+        <option value="ccjs">CCJS Building</option>
+        <option value="coed">COED Building</option>
+        <option value="con">CON Building</option>
+        <option value="com">COM Building</option>
+        <option value="cea">CEA Building</option>
+        <option value="library">Library</option>
+        <option value="registrar">Registrar</option>
+        <option value="cashier">Cashier</option>
+        <option value="president">Admin/President's Office</option>
+        <option value="alumni">Alumni Building</option>
+        <option value="sociocultural">Socio-Cultural Building</option>
+        <option value="hotel">NWSSU Hotel</option>
+        <option value="studentcouncil">Student Council</option>
+        <option value="canteen">Canteen</option>
+        <option value="sports">Sports Complex</option>
+      </select>
+      <select id="toLocation" class="map-select">
+        <option value="">🏁 To destination…</option>
+        <option value="gate">Main Gate</option>
+        <option value="cat">CAT Building</option>
+        <option value="ccis">CCIS Building</option>
+        <option value="ccjs">CCJS Building</option>
+        <option value="coed">COED Building</option>
+        <option value="con">CON Building</option>
+        <option value="com">COM Building</option>
+        <option value="cea">CEA Building</option>
+        <option value="library">Library</option>
+        <option value="registrar">Registrar</option>
+        <option value="cashier">Cashier</option>
+        <option value="president">Admin/President's Office</option>
+        <option value="alumni">Alumni Building</option>
+        <option value="sociocultural">Socio-Cultural Building</option>
+        <option value="hotel">NWSSU Hotel</option>
+        <option value="studentcouncil">Student Council</option>
+        <option value="canteen">Canteen</option>
+        <option value="sports">Sports Complex</option>
+      </select>
+      <button class="btn-primary full-w" onclick="simulateNavigation()">🧭 Get Directions</button>
+      <div id="navResult" class="nav-result"></div>
+    </div>
+
+    <!-- Location list -->
+    <div class="msb-block">
+      <p class="msb-label">LOCATIONS</p>
+      <div id="mapBldgList" class="msb-list">
+        <div class="msb-item" onclick="selectMapBuilding('cat')"><span class="msb-dot" style="background:#2d5a27"></span>CAT – Agriculture</div>
+        <div class="msb-item" onclick="selectMapBuilding('ccis')"><span class="msb-dot" style="background:#1a3a6b"></span>CCIS – Computing &amp; Info. Sci.</div>
+        <div class="msb-item" onclick="selectMapBuilding('ccjs')"><span class="msb-dot" style="background:#8b1a1a"></span>CCJS – Criminal Justice</div>
+        <div class="msb-item" onclick="selectMapBuilding('coed')"><span class="msb-dot" style="background:#c8a84b"></span>COED – Education</div>
+        <div class="msb-item" onclick="selectMapBuilding('con')"><span class="msb-dot" style="background:#1a6b5a"></span>CON – Nursing</div>
+        <div class="msb-item" onclick="selectMapBuilding('com')"><span class="msb-dot" style="background:#b5611a"></span>COM – Management</div>
+        <div class="msb-item" onclick="selectMapBuilding('cea')"><span class="msb-dot" style="background:#4a1a6b"></span>CEA – Engineering &amp; Arch.</div>
+        <div class="msb-item" onclick="selectMapBuilding('library')"><span class="msb-dot" style="background:#555"></span>University Library</div>
+        <div class="msb-item" onclick="selectMapBuilding('registrar')"><span class="msb-dot" style="background:#445"></span>Registrar's Office</div>
+        <div class="msb-item" onclick="selectMapBuilding('cashier')"><span class="msb-dot" style="background:#445"></span>Cashier's Office</div>
+        <div class="msb-item" onclick="selectMapBuilding('president')"><span class="msb-dot" style="background:#2c3e50"></span>Admin / President's Office</div>
+        <div class="msb-item" onclick="selectMapBuilding('alumni')"><span class="msb-dot" style="background:#666"></span>Alumni Building</div>
+        <div class="msb-item" onclick="selectMapBuilding('sociocultural')"><span class="msb-dot" style="background:#666"></span>Socio-Cultural Building</div>
+        <div class="msb-item" onclick="selectMapBuilding('hotel')"><span class="msb-dot" style="background:#666"></span>NWSSU Hotel &amp; Restaurant</div>
+        <div class="msb-item" onclick="selectMapBuilding('studentcouncil')"><span class="msb-dot" style="background:#666"></span>Student Council Building</div>
+        <div class="msb-item" onclick="selectMapBuilding('canteen')"><span class="msb-dot" style="background:#666"></span>University Canteen</div>
+        <div class="msb-item" onclick="selectMapBuilding('sports')"><span class="msb-dot" style="background:#2d5a27"></span>Sports Complex</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Map Canvas ── -->
+  <div class="map-canvas-area">
+
+
+    <!-- Layer toggle (top-right) -->
+    <div class="map-layer-toggle">
+      <button class="mlt-btn active" id="mltCampus" onclick="setMapLayer('campus', this)">🗺️ Campus</button>
+      <button class="mlt-btn" id="mltSat" onclick="setMapLayer('satellite', this)">🛰️ Satellite</button>
+    </div>
+
+    <!-- Zoom + clear tools (below layer toggle) -->
+    <div class="map-tools">
+      <button class="mtool" onclick="mapZoomIn()" title="Zoom in">＋</button>
+      <button class="mtool" onclick="mapZoomOut()" title="Zoom out">－</button>
+      <button class="mtool" onclick="mapReset()" title="Reset view">⊙</button>
+      <button class="mtool clear-btn" id="clearRouteBtn" onclick="clearRoute()" style="display:none">✕ Route</button>
+    </div>
+
+    <!-- Map viewport -->
+    <div class="map-viewport" id="mapViewport">
+      <div class="map-world" id="mapWorld">
+
+        <img class="campus-map-bg" id="campusMapBg"
+             src="images/nwssu_map.png" alt="NWSSU Campus Map" draggable="false"/>
+
+        <!-- Building Hotspots -->
+        <div class="mw-bldg" id="mb-ccjs" data-id="ccjs"
+             style="left:9%;top:43%;background:rgba(139,26,26,0.90)"
+             onclick="selectMapBuilding('ccjs')"><span>CCJS</span></div>
+
+        <div class="mw-bldg" id="mb-coed" data-id="coed"
+             style="left:5%;top:49%;background:rgba(200,168,75,0.90)"
+             onclick="selectMapBuilding('coed')"><span>COED</span></div>
+
+        <div class="mw-bldg sm" id="mb-alumni" data-id="alumni"
+             style="left:26%;top:24%;background:rgba(85,102,119,0.90)"
+             onclick="selectMapBuilding('alumni')"><span>ALU</span></div>
+
+        <div class="mw-bldg" id="mb-cat" data-id="cat"
+             style="left:58%;top:29%;background:rgba(45,90,39,0.90)"
+             onclick="selectMapBuilding('cat')"><span>CAT</span></div>
+
+        <div class="mw-bldg admin" id="mb-president" data-id="president"
+             style="left:63%;top:38%;background:rgba(44,62,80,0.90)"
+             onclick="selectMapBuilding('president')"><span>PRES</span></div>
+
+        <div class="mw-bldg sm" id="mb-registrar" data-id="registrar"
+             style="left:73%;top:33%;background:rgba(51,68,85,0.90)"
+             onclick="selectMapBuilding('registrar')"><span>REG</span></div>
+
+        <div class="mw-bldg sm" id="mb-cashier" data-id="cashier"
+             style="left:66%;top:48%;background:rgba(51,68,85,0.90)"
+             onclick="selectMapBuilding('cashier')"><span>CASH</span></div>
+
+        <div class="mw-bldg" id="mb-sports" data-id="sports"
+             style="left:34%;top:43%;background:rgba(26,107,90,0.75);min-width:90px"
+             onclick="selectMapBuilding('sports')"><span>⚽ SPORTS</span></div>
+
+        <div class="mw-bldg" id="mb-ccis" data-id="ccis"
+             style="left:24%;top:62%;background:rgba(26,58,107,0.90)"
+             onclick="selectMapBuilding('ccis')"><span>CCIS</span></div>
+
+        <div class="mw-bldg" id="mb-con" data-id="con"
+             style="left:37%;top:63%;background:rgba(26,107,90,0.90)"
+             onclick="selectMapBuilding('con')"><span>CON</span></div>
+
+        <div class="mw-bldg sm" id="mb-canteen" data-id="canteen"
+             style="left:46%;top:65%;background:rgba(85,102,119,0.90)"
+             onclick="selectMapBuilding('canteen')"><span>CAN</span></div>
+
+        <div class="mw-bldg sm" id="mb-sociocultural" data-id="sociocultural"
+             style="left:54%;top:67%;background:rgba(85,102,119,0.90)"
+             onclick="selectMapBuilding('sociocultural')"><span>RSU</span></div>
+
+        <div class="mw-bldg sm" id="mb-studentcouncil" data-id="studentcouncil"
+             style="left:62%;top:68%;background:rgba(85,102,119,0.90)"
+             onclick="selectMapBuilding('studentcouncil')"><span>AUX</span></div>
+
+        <div class="mw-bldg sm" id="mb-library" data-id="library"
+             style="left:62%;top:60%;background:rgba(68,85,102,0.90)"
+             onclick="selectMapBuilding('library')"><span>LIB</span></div>
+
+        <div class="mw-bldg sm" id="mb-hotel" data-id="hotel"
+             style="left:76%;top:61%;background:rgba(85,102,119,0.90)"
+             onclick="selectMapBuilding('hotel')"><span>HTL</span></div>
+
+        <div class="mw-bldg" id="mb-com" data-id="com"
+             style="left:81%;top:64%;background:rgba(181,97,26,0.90)"
+             onclick="selectMapBuilding('com')"><span>COM</span></div>
+
+        <div class="mw-bldg" id="mb-cea" data-id="cea"
+             style="left:64%;top:75%;background:rgba(74,26,107,0.90)"
+             onclick="selectMapBuilding('cea')"><span>CEA</span></div>
+
+        <div class="mw-bldg sm" id="mb-gate" data-id="gate"
+             style="left:36%;top:82%;background:rgba(200,168,75,0.90)"
+             onclick="selectMapBuilding('gate')"><span>🚪 GATE</span></div>
+
+        <!-- Route SVG overlay -->
+        <svg class="route-svg" id="routeSvg" viewBox="0 0 1000 750" preserveAspectRatio="none">
+          <defs>
+            <marker id="arrowTip" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="5" markerHeight="5" orient="auto">
+              <path d="M0,0 L10,5 L0,10 Z" fill="#f59e0b"/>
+            </marker>
+            <filter id="routeGlow">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+          </defs>
+          <path id="routePathGlow" d="" fill="none" stroke="rgba(245,158,11,0.35)"
+            stroke-width="20" stroke-linecap="round" stroke-linejoin="round"
+            opacity="0" filter="url(#routeGlow)"/>
+          <path id="routePath" d="" fill="none" stroke="#f59e0b"
+            stroke-width="7" stroke-linecap="round" stroke-linejoin="round"
+            stroke-dasharray="22 12" marker-end="url(#arrowTip)" opacity="0"/>
+          <circle id="travelDot" r="10" fill="#f59e0b" opacity="0"/>
+        </svg>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         BUILDING POPUP — anchored at TOP-CENTER
+         (z-index 60 in map-voice.css so it's
+          always above the voice panel)
+         ══════════════════════════════════════ -->
+    <div class="bldg-popup" id="bldgPopup">
+      <button class="popup-x" onclick="closePopup()">✕</button>
+      <div id="popupInner"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         VOICE NAV PANEL — bottom slide-up card
+         Opened by mic icon in search bar or FAB
+         ══════════════════════════════════════ -->
+    <div class="map-voice-panel" id="mapVoicePanel">
+
+      <div class="mvp-header">
+        <div class="mvp-header-left">
+          <div class="mvp-icon" id="mvpIcon">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <rect x="9" y="2" width="6" height="12" rx="3" fill="currentColor"/>
+              <path d="M5 10a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="mvp-title">Voice Navigation</div>
+            <div class="mvp-status" id="mvpStatus">Tap mic to navigate</div>
+          </div>
+        </div>
+        <button class="mvp-close" onclick="closeMapVoice()" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Live transcript -->
+      <div class="mvp-transcript" id="mvpTranscript" style="display:none">
+        <span class="mvp-transcript-icon">💬</span>
+        <span id="mvpTranscriptText">"…"</span>
+      </div>
+
+      <!-- Result feedback -->
+      <div class="mvp-result" id="mvpResult"></div>
+
+      <!-- Mic + hint area -->
+      <div class="mvp-listen-area">
+        <div class="mvp-rings" id="mvpRings">
+          <div class="mvp-ring mvp-r1"></div>
+          <div class="mvp-ring mvp-r2"></div>
+          <div class="mvp-ring mvp-r3"></div>
+        </div>
+        <button class="mvp-mic-btn" id="mvpMicBtn"
+                onclick="toggleMapVoiceListen()"
+                aria-label="Start listening">
+          <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+            <rect x="9" y="2" width="6" height="12" rx="3" fill="currentColor"/>
+            <path d="M5 10a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="mvp-hint-text" id="mvpHintText">
+          Tap the mic and say<br>
+          <em>"Navigate to Library"</em> or<br>
+          <em>"Go to Canteen"</em>
+        </div>
+      </div>
+
+      <!-- Quick chips -->
+      <div class="mvp-chips-label">Try saying:</div>
+      <div class="mvp-chips">
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to library')">🏢 Library</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to canteen')">🍽️ Canteen</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to registrar')">📋 Registrar</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to sports')">⚽ Sports</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to ccis')">💻 CCIS</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to president')">🏛️ Admin</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to cashier')">💳 Cashier</button>
+        <button class="mvp-chip" onclick="runMapVoiceCommand('navigate to gate')">🚪 Gate</button>
+      </div>
+
+      <!-- Footer settings -->
+      <div class="mvp-footer">
+        <select class="mvp-lang-sel" id="mvpLang" onchange="setMapVoiceLang(this.value)">
+          <option value="en-PH">🇵🇭 English (PH)</option>
+          <option value="en-US">🇺🇸 English (US)</option>
+          <option value="fil-PH">🇵🇭 Filipino</option>
+        </select>
+        <div class="mvp-autoread-wrap">
+          <span>Auto-speak</span>
+          <label class="vn-toggle" style="width:34px;height:20px">
+            <input type="checkbox" id="mvpAutoRead" checked/>
+            <span class="vn-toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+    </div><!-- end .map-voice-panel -->
+
+  </div><!-- end .map-canvas-area -->
+
+</div><!-- end .map-layout -->

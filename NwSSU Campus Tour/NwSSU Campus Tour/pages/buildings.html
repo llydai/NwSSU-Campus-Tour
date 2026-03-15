@@ -1,0 +1,21 @@
+<!-- ════════════════════════════════════════════════
+     BUILDINGS PAGE
+     File: pages/buildings.html
+     Loaded by: js/page-loader.js → #page-buildings
+     Populated by: js/app-populate.js → populateBuildings()
+     Data source:  js/data.js → BUILDINGS[]
+     ════════════════════════════════════════════════ -->
+<div class="inner-page">
+  <div class="page-header">
+    <h1>Campus Buildings</h1>
+    <p>All buildings and facilities at NWSSU</p>
+  </div>
+  <div class="filter-row">
+    <button class="fbtn active" onclick="filterBuildings('all',this)">All</button>
+    <button class="fbtn" onclick="filterBuildings('academic',this)">Academic</button>
+    <button class="fbtn" onclick="filterBuildings('admin',this)">Administrative</button>
+    <button class="fbtn" onclick="filterBuildings('facility',this)">Facilities</button>
+  </div>
+  <!-- Cards injected here by populateBuildings() in js/app-populate.js -->
+  <div class="bldg-grid" id="buildingsGrid"></div>
+</div>

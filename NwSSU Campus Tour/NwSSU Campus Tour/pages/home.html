@@ -1,0 +1,105 @@
+<!-- ════════════════════════════════════════════════
+     HOME PAGE
+     File: pages/home.html
+     Loaded by: js/page-loader.js → #page-home
+     ════════════════════════════════════════════════ -->
+
+<!-- ── Hero Section ── -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌿 Est. 1983 · Calbayog City, Samar</div>
+      <h1 class="hero-h1">Explore <em>NWSSU</em><br class="br-hide"/> — Your Campus,<br class="br-show"/> Your Home.</h1>
+      <p class="hero-p">Discover buildings, navigate facilities, and find everything you need — all in one interactive campus platform.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="navigateTo('map')">🗺️ Open Campus Map</button>
+        <button class="btn-ghost" onclick="navigateTo('freshmen')">Freshmen Guide →</button>
+      </div>
+    </div>
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hcard-top">
+          <span>Campus Overview</span>
+          <span class="hcard-live">● Live</span>
+        </div>
+        <div class="hcard-stats">
+          <div class="hs-item"><b>7</b><span>Colleges</span></div>
+          <div class="hs-div"></div>
+          <div class="hs-item"><b>20+</b><span>Buildings</span></div>
+          <div class="hs-div"></div>
+          <div class="hs-item"><b>50+</b><span>Offices</span></div>
+        </div>
+        <div class="hcard-mini-map" onclick="navigateTo('map')">
+          <div class="hmm-inner">
+            <div class="hmm-road rh"></div>
+            <div class="hmm-road rv"></div>
+            <div class="hmm-b" style="left:8%;top:12%;background:#2d5a27">CAT</div>
+            <div class="hmm-b" style="left:29%;top:10%;background:#1a3a6b">CCIS</div>
+            <div class="hmm-b" style="left:50%;top:8%;background:#555">LIB</div>
+            <div class="hmm-b" style="left:68%;top:11%;background:#c8a84b">COED</div>
+            <div class="hmm-b" style="left:85%;top:10%;background:#4a1a6b">CEA</div>
+            <div class="hmm-b" style="left:9%;top:44%;background:#1a6b5a">CON</div>
+            <div class="hmm-b" style="left:29%;top:42%;background:#b5611a">COM</div>
+            <div class="hmm-b big" style="left:47%;top:40%;background:#2c3e50">ADM</div>
+            <div class="hmm-b" style="left:83%;top:42%;background:#8b1a1a">CCJS</div>
+            <div class="hmm-tap">Tap to open full map →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Quick Access ── -->
+<div class="home-section">
+  <div class="sec-hd"><h2>Quick Access</h2><p>Jump to key locations</p></div>
+  <div class="quick-grid">
+    <button class="qbtn" onclick="openBuilding('library')"><span>📚</span><small>Library</small></button>
+    <button class="qbtn" onclick="openBuilding('registrar')"><span>📋</span><small>Registrar</small></button>
+    <button class="qbtn" onclick="openBuilding('cashier')"><span>💳</span><small>Cashier</small></button>
+    <button class="qbtn" onclick="openBuilding('canteen')"><span>🍽️</span><small>Canteen</small></button>
+    <button class="qbtn" onclick="openBuilding('president')"><span>🏛️</span><small>President</small></button>
+    <button class="qbtn" onclick="openBuilding('hotel')"><span>🏨</span><small>Hotel</small></button>
+    <button class="qbtn" onclick="openBuilding('sports')"><span>⚽</span><small>Sports</small></button>
+    <button class="qbtn" onclick="openBuilding('alumni')"><span>🎓</span><small>Alumni</small></button>
+  </div>
+</div>
+
+<!-- ── Academic Colleges ── -->
+<div class="home-section alt">
+  <div class="sec-hd"><h2>Academic Colleges</h2><p>Seven colleges offering diverse programs</p></div>
+  <div class="college-grid">
+    <div class="clg-card" onclick="openDept('cat')"><div class="clg-strip" style="background:#2d5a27"></div><div class="clg-body"><span class="clg-code" style="color:#2d5a27">CAT</span><h3>College of Agriculture</h3><p>Agricultural sciences, crop production, animal science &amp; agri-business management</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('ccis')"><div class="clg-strip" style="background:#1a3a6b"></div><div class="clg-body"><span class="clg-code" style="color:#1a3a6b">CCIS</span><h3>College of Computing &amp; Information Sciences</h3><p>IT, Computer Science, Information Systems &amp; Software Engineering programs</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('ccjs')"><div class="clg-strip" style="background:#8b1a1a"></div><div class="clg-body"><span class="clg-code" style="color:#8b1a1a">CCJS</span><h3>College of Criminal Justice &amp; Science</h3><p>Criminology, forensic science &amp; criminal justice administration</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('coed')"><div class="clg-strip" style="background:#c8a84b"></div><div class="clg-body"><span class="clg-code" style="color:#c8a84b">COED</span><h3>College of Education</h3><p>Teacher education programs for elementary, secondary &amp; special education</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('con')"><div class="clg-strip" style="background:#1a6b5a"></div><div class="clg-body"><span class="clg-code" style="color:#1a6b5a">CON</span><h3>College of Nursing</h3><p>BS Nursing with clinical training, simulation labs &amp; health sciences</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('com')"><div class="clg-strip" style="background:#b5611a"></div><div class="clg-body"><span class="clg-code" style="color:#b5611a">COM</span><h3>College of Management</h3><p>Business administration, management, entrepreneurship &amp; hospitality programs</p></div><span class="clg-chevron">›</span></div>
+    <div class="clg-card" onclick="openDept('cea')"><div class="clg-strip" style="background:#4a1a6b"></div><div class="clg-body"><span class="clg-code" style="color:#4a1a6b">CEA</span><h3>College of Engineering &amp; Architecture</h3><p>Civil, electrical, mechanical engineering &amp; architecture programs</p></div><span class="clg-chevron">›</span></div>
+  </div>
+</div>
+
+<!-- ── Campus Highlights / Announcements ── -->
+<div class="home-section">
+  <div class="sec-hd"><h2>Campus Highlights</h2></div>
+  <div class="announce-grid">
+    <div class="ann-card featured">
+      <span class="ann-tag">EVENT</span>
+      <h3>University Foundation Week 2025</h3>
+      <p>Celebrating NWSSU's rich history with cultural shows, sports competitions, and academic exhibits.</p>
+      <span class="ann-date">📅 March 15–20, 2025</span>
+    </div>
+    <div class="ann-card">
+      <span class="ann-tag">ACADEMIC</span>
+      <h3>Enrollment Now Open</h3>
+      <p>1st Semester AY 2025-2026. Visit the Registrar's Office or enroll online.</p>
+      <span class="ann-date">📅 June 2025</span>
+    </div>
+    <div class="ann-card">
+      <span class="ann-tag">FACILITY</span>
+      <h3>New CCIS Building</h3>
+      <p>State-of-the-art computer labs and smart classrooms now open for students.</p>
+      <span class="ann-date">📅 February 2025</span>
+    </div>
+  </div>
+</div>

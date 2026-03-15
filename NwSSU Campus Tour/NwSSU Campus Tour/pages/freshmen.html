@@ -1,0 +1,92 @@
+<!-- ════════════════════════════════════════════════
+     FRESHMEN GUIDE PAGE
+     File: pages/freshmen.html
+     Loaded by: js/page-loader.js → #page-freshmen
+     ════════════════════════════════════════════════ -->
+
+<!-- Banner -->
+<div class="fg-banner">
+  <div class="fg-banner-inner">
+    <div class="fg-emoji">🎓</div>
+    <h1>Welcome to NWSSU!</h1>
+    <p>Your complete guide to starting your university journey</p>
+  </div>
+</div>
+
+<div class="fg-content">
+
+  <!-- ── Step-by-Step Enrollment ── -->
+  <div class="fg-block">
+    <h2>Step-by-Step Enrollment</h2>
+    <div class="step-timeline">
+
+      <div class="step-item">
+        <div class="step-dot">1</div>
+        <div class="step-body">
+          <h3>Visit the Registrar's Office</h3>
+          <p>Submit: Form 138, PSA Birth Certificate, Good Moral Certificate, and 2×2 ID photos.</p>
+          <button class="btn-sm" onclick="selectMapBuilding('registrar');navigateTo('map')">📍 View on Map</button>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-dot">2</div>
+        <div class="step-body">
+          <h3>Entrance Examination</h3>
+          <p>Take the University Entrance Examination (UEE). Results posted within 3–5 days via bulletin board or online portal.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-dot">3</div>
+        <div class="step-body">
+          <h3>Assessment &amp; Enrollment</h3>
+          <p>Once accepted, get your assessment form from your college. Choose subjects and schedule with your academic adviser.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-dot">4</div>
+        <div class="step-body">
+          <h3>Payment at the Cashier</h3>
+          <p>Pay tuition and miscellaneous fees. Ask about CHED scholarships and financial assistance programs.</p>
+          <button class="btn-sm" onclick="selectMapBuilding('cashier');navigateTo('map')">📍 View on Map</button>
+        </div>
+      </div>
+
+      <div class="step-item last">
+        <div class="step-dot">5</div>
+        <div class="step-body">
+          <h3>Get Your Student ID</h3>
+          <p>Return to the Registrar for ID processing. Required for library access, labs, and all campus services.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Essential Places ── -->
+  <div class="fg-block alt-bg">
+    <h2>Essential Places</h2>
+    <div class="essentials-grid">
+      <div class="ess-card" onclick="selectMapBuilding('library');navigateTo('map')"><span class="ess-ico">📚</span><h3>Library</h3><p>Books, journals, digital resources. Mon–Fri 7AM–9PM.</p></div>
+      <div class="ess-card" onclick="selectMapBuilding('canteen');navigateTo('map')"><span class="ess-ico">🍽️</span><h3>Canteen</h3><p>Affordable Filipino meals. Multiple stalls. 6:30AM–7PM.</p></div>
+      <div class="ess-card" onclick="selectMapBuilding('sports');navigateTo('map')"><span class="ess-ico">⚽</span><h3>Sports Complex</h3><p>Basketball, volleyball, track oval, gym. Open 5AM–9PM.</p></div>
+      <div class="ess-card" onclick="navigateTo('orgs')"><span class="ess-ico">👥</span><h3>Organizations</h3><p>Academic clubs to cultural groups — find your community!</p></div>
+    </div>
+  </div>
+
+  <!-- ── Freshmen Tips ── -->
+  <div class="fg-block">
+    <h2>Freshmen Tips</h2>
+    <div class="tips-grid">
+      <div class="tip-card">💡 <strong>Arrive Early</strong> — Campus gets busy. Be there 15–20 min before class.</div>
+      <div class="tip-card">🗺️ <strong>Use This App</strong> — Bookmark this tour app to navigate quickly.</div>
+      <div class="tip-card">📅 <strong>Academic Calendar</strong> — Check your college bulletin board for schedules.</div>
+      <div class="tip-card">🤝 <strong>Talk to Seniors</strong> — They know shortcuts, best profs, and hidden spots.</div>
+      <div class="tip-card">📱 <strong>NWSSU Portal</strong> — Access grades and schedules through the student portal.</div>
+      <div class="tip-card">🏥 <strong>Clinic</strong> — Free basic medical services near the Admin Building.</div>
+    </div>
+  </div>
+
+</div>

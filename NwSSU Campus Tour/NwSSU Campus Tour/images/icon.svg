@@ -1,0 +1,19 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1a1a1a"/>
+
+  <!-- Gift box -->
+  <rect x="32" y="56" width="64" height="36" rx="6" fill="#d4af37"/>
+  <rect x="60" y="56" width="8" height="36" fill="#1a1a1a"/>
+
+  <!-- Ribbon top -->
+  <rect x="32" y="48" width="64" height="10" rx="4" fill="#d4af37"/>
+
+  <!-- Heart -->
+  <path d="M64 36
+           C64 30, 72 26, 76 32
+           C80 26, 88 30, 88 36
+           C88 44, 76 52, 76 52
+           C76 52, 64 44, 64 36Z"
+        fill="#ff4d6d"/>
+</svg>

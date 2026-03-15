@@ -1,0 +1,216 @@
+<!-- ════════════════════════════════════════════════
+     SHORTCUTS PANEL
+     File: pages/shortcuts.html
+     Injected by: js/page-loader.js → #shortcutsPanel
+     Logic: js/app-shortcuts.js
+     Styles: css/shortcuts.css
+
+     This is a floating overlay panel (not a page section).
+     It is injected into <div id="shortcutsPanel"> in index.html.
+     ════════════════════════════════════════════════ -->
+
+<div class="sc-backdrop" id="scBackdrop" onclick="closeShortcuts()"></div>
+
+<div class="sc-panel" id="scPanel" role="dialog" aria-modal="true" aria-label="Keyboard Shortcuts & Quick Actions">
+
+  <!-- ── Header ── -->
+  <div class="sc-header">
+    <div class="sc-header-left">
+      <div class="sc-icon-wrap">⚡</div>
+      <div>
+        <h2 class="sc-title">Quick Actions</h2>
+        <p class="sc-subtitle">Shortcuts &amp; fast navigation</p>
+      </div>
+    </div>
+    <button class="sc-close" onclick="closeShortcuts()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- ── Tabs ── -->
+  <div class="sc-tabs" id="scTabs">
+    <button class="sc-tab active" data-tab="keyboard" onclick="switchShortcutTab('keyboard', this)">⌨️ Keyboard</button>
+    <button class="sc-tab" data-tab="quick"    onclick="switchShortcutTab('quick', this)">🚀 Quick Nav</button>
+    <button class="sc-tab" data-tab="swipe"    onclick="switchShortcutTab('swipe', this)">👆 Gestures</button>
+  </div>
+
+  <!-- ══ TAB: KEYBOARD SHORTCUTS ══ -->
+  <div class="sc-tab-content active" id="sc-tab-keyboard">
+
+    <div class="sc-group">
+      <div class="sc-group-title">Navigation</div>
+      <div class="sc-rows">
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>H</kbd></div><span class="sc-desc">Go to Home</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>M</kbd></div><span class="sc-desc">Open Map</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>B</kbd></div><span class="sc-desc">Buildings</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>D</kbd></div><span class="sc-desc">Departments</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>O</kbd></div><span class="sc-desc">Offices</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>G</kbd></div><span class="sc-desc">Organizations</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>F</kbd></div><span class="sc-desc">Freshmen Guide</span></div>
+      </div>
+    </div>
+
+    <div class="sc-group">
+      <div class="sc-group-title">Search &amp; Tools</div>
+      <div class="sc-rows">
+        <div class="sc-row"><div class="sc-keys"><kbd>Ctrl</kbd><kbd>K</kbd></div><span class="sc-desc">Focus global search</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>V</kbd></div><span class="sc-desc">Toggle Voice Nav</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Alt</kbd><kbd>S</kbd></div><span class="sc-desc">Open Shortcuts panel</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>Esc</kbd></div><span class="sc-desc">Close any panel / modal</span></div>
+      </div>
+    </div>
+
+    <div class="sc-group">
+      <div class="sc-group-title">Map Controls</div>
+      <div class="sc-rows">
+        <div class="sc-row"><div class="sc-keys"><kbd>+</kbd></div><span class="sc-desc">Zoom in</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>−</kbd></div><span class="sc-desc">Zoom out</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>0</kbd></div><span class="sc-desc">Reset map zoom</span></div>
+        <div class="sc-row"><div class="sc-keys"><kbd>←</kbd><kbd>→</kbd></div><span class="sc-desc">Cycle buildings on map</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ TAB: QUICK NAVIGATION ══ -->
+  <div class="sc-tab-content" id="sc-tab-quick">
+
+    <div class="sc-group">
+      <div class="sc-group-title">Pages</div>
+      <div class="sc-quick-grid">
+        <button class="sc-quick-btn" onclick="navigateTo('home');closeShortcuts()">
+          <span class="sc-qb-icon">🏠</span><span>Home</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('map');closeShortcuts()">
+          <span class="sc-qb-icon">🗺️</span><span>Campus Map</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('buildings');closeShortcuts()">
+          <span class="sc-qb-icon">🏛️</span><span>Buildings</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('departments');closeShortcuts()">
+          <span class="sc-qb-icon">🎓</span><span>Departments</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('offices');closeShortcuts()">
+          <span class="sc-qb-icon">🏢</span><span>Offices</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('orgs');closeShortcuts()">
+          <span class="sc-qb-icon">👥</span><span>Organizations</span>
+        </button>
+        <button class="sc-quick-btn" onclick="navigateTo('freshmen');closeShortcuts()">
+          <span class="sc-qb-icon">📚</span><span>Freshmen Guide</span>
+        </button>
+        <button class="sc-quick-btn" onclick="openVoiceNav();closeShortcuts()">
+          <span class="sc-qb-icon">🎙️</span><span>Voice Nav</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sc-group">
+      <div class="sc-group-title">Jump to Building</div>
+      <div class="sc-quick-grid dense">
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('library');navigateTo('map');closeShortcuts()"><span>📚</span>Library</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('registrar');navigateTo('map');closeShortcuts()"><span>📋</span>Registrar</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('cashier');navigateTo('map');closeShortcuts()"><span>💳</span>Cashier</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('canteen');navigateTo('map');closeShortcuts()"><span>🍽️</span>Canteen</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('president');navigateTo('map');closeShortcuts()"><span>🏛️</span>Admin / President</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('sports');navigateTo('map');closeShortcuts()"><span>⚽</span>Sports Complex</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('hotel');navigateTo('map');closeShortcuts()"><span>🏨</span>Hotel</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('alumni');navigateTo('map');closeShortcuts()"><span>🎓</span>Alumni</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('cat');navigateTo('map');closeShortcuts()"><span>🌾</span>CAT</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('ccis');navigateTo('map');closeShortcuts()"><span>💻</span>CCIS</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('ccjs');navigateTo('map');closeShortcuts()"><span>⚖️</span>CCJS</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('coed');navigateTo('map');closeShortcuts()"><span>📖</span>COED</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('con');navigateTo('map');closeShortcuts()"><span>🏥</span>CON</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('com');navigateTo('map');closeShortcuts()"><span>💼</span>COM</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('cea');navigateTo('map');closeShortcuts()"><span>🏗️</span>CEA</button>
+        <button class="sc-bldg-btn" onclick="selectMapBuilding('gate');navigateTo('map');closeShortcuts()"><span>🚪</span>Main Gate</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ TAB: GESTURES ══ -->
+  <div class="sc-tab-content" id="sc-tab-swipe">
+
+    <div class="sc-group">
+      <div class="sc-group-title">Touch Gestures</div>
+      <div class="sc-gesture-list">
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon swipe-right"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Swipe Right</strong>
+            <p>Go to next page in sequence</p>
+          </div>
+        </div>
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon swipe-left"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Swipe Left</strong>
+            <p>Go to previous page in sequence</p>
+          </div>
+        </div>
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon pinch"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Pinch / Spread</strong>
+            <p>Zoom in and out on the campus map</p>
+          </div>
+        </div>
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon double-tap"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Double Tap (Map)</strong>
+            <p>Zoom in at tapped location</p>
+          </div>
+        </div>
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon long-press"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Long Press (Map building)</strong>
+            <p>Set as navigation destination</p>
+          </div>
+        </div>
+
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo">
+            <div class="sc-gesture-icon swipe-down"></div>
+          </div>
+          <div class="sc-gesture-info">
+            <strong>Swipe Down (Panel)</strong>
+            <p>Close any open detail panel</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="sc-group">
+      <div class="sc-group-title">Floating Buttons</div>
+      <div class="sc-gesture-list">
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo"><div class="sc-fab-preview mic">🎙️</div></div>
+          <div class="sc-gesture-info"><strong>Mic Button (bottom right)</strong><p>Open Voice Navigation panel</p></div>
+        </div>
+        <div class="sc-gesture-row">
+          <div class="sc-gesture-demo"><div class="sc-fab-preview bolt">⚡</div></div>
+          <div class="sc-gesture-info"><strong>Bolt Button (bottom right)</strong><p>Open this Shortcuts panel</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

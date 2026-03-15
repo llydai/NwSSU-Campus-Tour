@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#2d5a27"/>
+  <title>NWSSU Campus Tour &amp; Navigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/voice-nav.css"/>
+  <link rel="stylesheet" href="css/shortcuts.css"/>
+  <!-- NEW: Map page Google-Maps style + inline voice panel -->
+  <link rel="stylesheet" href="css/map-voice.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     SPLASH SCREEN
+     ══════════════════════════════════════════════ -->
+<div id="splash" class="splash">
+  <div class="splash-orbs">
+    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  </div>
+  <div class="splash-inner">
+    <div class="splash-logo-wrap">
+      <svg class="spin-svg" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="4"/>
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#c8a84b" stroke-width="4"
+          stroke-dasharray="100 240" stroke-linecap="round" class="spin-arc"/>
+      </svg>
+      <div class="splash-emblem">N</div>
+    </div>
+    <h1 class="splash-title">Northwest Samar<br/>State University</h1>
+    <p class="splash-sub">Interactive Campus Tour &amp; Navigation</p>
+    <div class="splash-progress"><div class="splash-fill"></div></div>
+    <span class="splash-loading-text">Loading campus data…</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     NAVBAR
+     ══════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand" onclick="navigateTo('home')" role="button" tabindex="0">
+    <div class="brand-mark">N</div>
+    <div class="brand-info">
+      <span class="brand-name">NWSSU</span>
+      <span class="brand-sub">Campus Tour</span>
+    </div>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a class="nl active" data-page="home" href="#">Home</a>
+    <a class="nl" data-page="map" href="#">Map</a>
+    <a class="nl" data-page="buildings" href="#">Buildings</a>
+    <a class="nl" data-page="departments" href="#">Departments</a>
+    <a class="nl" data-page="offices" href="#">Offices</a>
+    <a class="nl" data-page="orgs" href="#">Organizations</a>
+    <a class="nl" data-page="freshmen" href="#">Freshmen</a>
+  </div>
+  <div class="nav-actions">
+    <div class="nav-search-box">
+      <span class="ns-icon">⌕</span>
+      <input type="text" id="globalSearch" class="ns-input" placeholder="Search campus…" autocomplete="off"/>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     MOBILE DRAWER
+     ══════════════════════════════════════════════ -->
+<div class="drawer-bg" id="drawerBg" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-top">
+    <div class="brand-mark sm">N</div>
+    <span class="drawer-title">NWSSU Campus</span>
+    <button class="drawer-x" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-search-row">
+    <input type="text" placeholder="Search…" oninput="doSearch(this.value)"/>
+  </div>
+  <div class="drawer-links">
+    <a class="dl" data-page="home" href="#">🏠 Home</a>
+    <a class="dl" data-page="map" href="#">🗺️ Campus Map</a>
+    <a class="dl" data-page="buildings" href="#">🏛️ Buildings</a>
+    <a class="dl" data-page="departments" href="#">🎓 Departments</a>
+    <a class="dl" data-page="offices" href="#">🏢 Offices</a>
+    <a class="dl" data-page="orgs" href="#">👥 Organizations</a>
+    <a class="dl" data-page="freshmen" href="#">📚 Freshmen Guide</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SEARCH RESULTS PANEL
+     ══════════════════════════════════════════════ -->
+<div class="search-panel" id="searchPanel"></div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE CONTAINER
+     ══════════════════════════════════════════════ -->
+<main id="main">
+  <section class="page active" id="page-home"></section>
+  <section class="page" id="page-map"></section>
+  <section class="page" id="page-buildings"></section>
+  <section class="page" id="page-departments"></section>
+  <section class="page" id="page-offices"></section>
+  <section class="page" id="page-orgs"></section>
+  <section class="page" id="page-freshmen"></section>
+</main>
+
+<!-- ══════════════════════════════════════════════
+     DETAIL MODAL
+     ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════════
+     SWIPE PAGE INDICATOR DOTS
+     ══════════════════════════════════════════════ -->
+<div class="page-dots" id="pageDots"></div>
+
+<!-- ══════════════════════════════════════════════
+     FLOATING ACTION BUTTONS
+     Voice Nav → navigates to Map page & opens inline voice panel
+     Shortcuts → opens shortcuts overlay
+     ══════════════════════════════════════════════ -->
+<div class="fab-cluster">
+  <button class="fab fab-shortcuts" id="fabShortcuts"
+          onclick="openShortcuts()"
+          aria-label="Open keyboard shortcuts and quick actions">
+    ⚡
+    <span class="fab-label">Quick Actions</span>
+  </button>
+  <button class="fab fab-mic" id="fabMic"
+          onclick="navigateTo('map'); setTimeout(openMapVoice, 350)"
+          aria-label="Open voice navigation on Map">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+      <rect x="9" y="2" width="6" height="12" rx="3" fill="currentColor"/>
+      <path d="M5 10a7 7 0 0 0 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <line x1="8"  y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="fab-label">Voice Nav</span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SHORTCUTS PANEL (injected by page-loader)
+     ══════════════════════════════════════════════ -->
+<div id="voiceNavPanel"></div>
+<div id="shortcutsPanel"></div>
+
+<!-- ── DATA ── -->
+<script src="js/data.js"></script>
+
+<!-- ── PAGE CONTENT LOADER ── -->
+<script src="js/page-loader.js"></script>
+
+<!-- ── APP MODULES ── -->
+<script src="js/app-core.js"></script>
+<script src="js/app-search.js"></script>
+<script src="js/app-map.js"></script>
+<script src="js/app-ui.js"></script>
+<script src="js/app-detail.js"></script>
+<script src="js/app-populate.js"></script>
+<script src="js/app-voice.js"></script>
+<script src="js/app-shortcuts.js"></script>
+
+</body>
+</html>
